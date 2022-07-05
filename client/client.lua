@@ -9,7 +9,7 @@ local ExitPrompt
 local InteriorExitPrompts = GetRandomIntInRange(0, 0xffffff)
 
 function InteriorExitPromptset()
-    local str = 'Salir'
+    local str = Config.PromptExit
     ExitPrompt = PromptRegisterBegin()
     PromptSetControlAction(ExitPrompt, 0xCEFD9220)
     str = CreateVarString(10, 'LITERAL_STRING', str)
@@ -21,7 +21,7 @@ function InteriorExitPromptset()
 	Citizen.InvokeNative(0xC5F428EE08FA7F2C,ExitPrompt,true)
 	PromptRegisterEnd(ExitPrompt)
 
-    local str2 = 'Entrar'
+    local str2 = Config.PromptEnter
     EnterPrompt = PromptRegisterBegin()
     PromptSetControlAction(EnterPrompt, 0xCEFD9220)
     str2 = CreateVarString(10, 'LITERAL_STRING', str2)
@@ -72,7 +72,7 @@ Citizen.CreateThread(function()
                     Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.exitPos.x, v.exitPos.y, v.exitPos.z-1.2 , 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
                 end
                 if dist < 1.1 then 
-                    local label  = CreateVarString(10, 'LITERAL_STRING', "Entrada a: "..v.name)
+                    local label  = CreateVarString(10, 'LITERAL_STRING', Config.VarStringEnter..v.name)
                     PromptSetActiveGroupThisFrame(InteriorPrompts, label)
                     if Citizen.InvokeNative(0xC92AC953F0A982AE,EnterPrompt) then
                         TriggerServerEvent("xakra_teleports:setcoords_enter", v.exitPos.x, v.exitPos.y, v.exitPos.z, i)
@@ -80,7 +80,7 @@ Citizen.CreateThread(function()
                     end
                 end
                 if dist2 ~= nil and dist2 < 1.1 and v.exit == true then 
-                    local label  = CreateVarString(10, 'LITERAL_STRING', "Salida de: "..v.name)
+                    local label  = CreateVarString(10, 'LITERAL_STRING', Config.PromptExit..v.name)
                     PromptSetActiveGroupThisFrame(InteriorExitPrompts, label)
                     if Citizen.InvokeNative(0xC92AC953F0A982AE,ExitPrompt) then
                         TriggerServerEvent("xakra_teleports:setcoords_exit", v.enterPos.x, v.enterPos.y, v.enterPos.z)

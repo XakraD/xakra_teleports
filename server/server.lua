@@ -26,7 +26,7 @@ AddEventHandler("xakra_teleports:setcoords_enter", function(x,y,z, id)
             end
         end
         if hasjob == false then 
-            TriggerClientEvent("vorp:TipRight", _source, "No tienes permitido entrar", 6000) 
+            TriggerClientEvent("vorp:TipRight", _source, Config.JobMessage, 6000) 
         elseif hasjob == true then 
             SetEntityCoords(GetPlayerPed(_source), x, y, z)
         end
