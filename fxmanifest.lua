@@ -1,5 +1,5 @@
 original_author 'RicX'
-edit_author 'Xakra <Discord:Xakra#8145>'
+edit_author 'Xakra <Discord:Xakra#8145:https://discord.gg/kmsqB6xQjH>'
 version '1.0.0'
 description 'xakra_teleports'
 

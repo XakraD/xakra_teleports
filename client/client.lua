@@ -11,7 +11,7 @@ local InteriorExitPrompts = GetRandomIntInRange(0, 0xffffff)
 function InteriorExitPromptset()
     local str = Config.PromptExit
     ExitPrompt = PromptRegisterBegin()
-    PromptSetControlAction(ExitPrompt, 0xCEFD9220)
+    PromptSetControlAction(ExitPrompt, Config.KeyEnter)
     str = CreateVarString(10, 'LITERAL_STRING', str)
     PromptSetText(ExitPrompt, str)
     PromptSetEnabled(ExitPrompt, 1)
@@ -23,7 +23,7 @@ function InteriorExitPromptset()
 
     local str2 = Config.PromptEnter
     EnterPrompt = PromptRegisterBegin()
-    PromptSetControlAction(EnterPrompt, 0xCEFD9220)
+    PromptSetControlAction(EnterPrompt, Config.keyExit)
     str2 = CreateVarString(10, 'LITERAL_STRING', str2)
     PromptSetText(EnterPrompt, str2)
     PromptSetEnabled(EnterPrompt, 1)
@@ -93,17 +93,4 @@ Citizen.CreateThread(function()
         end
         Citizen.Wait(t)
     end
-end)
-
-
-function RemoveInteriorExitPrompts()
-    PromptDelete(EnterPrompt)
-    PromptDelete(ExitPrompt)
-end
-
-AddEventHandler('onResourceStop', function(resourceName)
-	if (GetCurrentResourceName() ~= resourceName) then
-	  return
-	end
-    RemoveInteriorExitPrompts()
 end)

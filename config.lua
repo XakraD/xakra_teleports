@@ -2,6 +2,9 @@ Config = {}
 
 Config.JobMessage = "No tienes permitido entrar" -- Message when you don't have the job to access
 
+Config.KeyEnter =  0xCEFD9220
+Config.keyExit = 0xCEFD9220
+
 Config.PromptEnter = "Entrar"   -- Enter button text.
 Config.PromptExit = "Salir" --Exit button text.
 
@@ -26,5 +29,5 @@ Config.Locations = {
 		job = {"sheriff"},  -- Jobs to enter {"job1","job2"} , or false for no job.
 		blip = {enable = true, sprite = 2305242038},    -- Enable o disable blip (true/false) and sprite (hash blip).
     },
-
 }
+
