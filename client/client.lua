@@ -71,7 +71,7 @@ Citizen.CreateThread(function()
                 if dist2 ~= nil and dist2 < 4.0 and v.exit == true then 
                     Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.exitPos.x, v.exitPos.y, v.exitPos.z-1.2 , 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
                 end
-                if dist < 1.1 then 
+                if dist < 1.2 then 
                     local label  = CreateVarString(10, 'LITERAL_STRING', Config.VarStringEnter..v.name)
                     PromptSetActiveGroupThisFrame(InteriorPrompts, label)
                     if Citizen.InvokeNative(0xC92AC953F0A982AE,EnterPrompt) then
@@ -79,8 +79,8 @@ Citizen.CreateThread(function()
                         Citizen.Wait(2000)
                     end
                 end
-                if dist2 ~= nil and dist2 < 1.1 and v.exit == true then 
-                    local label  = CreateVarString(10, 'LITERAL_STRING', Config.PromptExit..v.name)
+                if dist2 ~= nil and dist2 < 1.2 and v.exit == true then 
+                    local label  = CreateVarString(10, 'LITERAL_STRING', Config.VarStringExit..v.name)
                     PromptSetActiveGroupThisFrame(InteriorExitPrompts, label)
                     if Citizen.InvokeNative(0xC92AC953F0A982AE,ExitPrompt) then
                         TriggerServerEvent("xakra_teleports:setcoords_exit", v.enterPos.x, v.enterPos.y, v.enterPos.z)
