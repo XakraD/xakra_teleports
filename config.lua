@@ -19,6 +19,8 @@ Config.Locations = {
         exit = true,    -- Enable exit prompt (true) or remove exit prompt(false), if you can leave tents by walking through the wall, wall has collision bugs.
         job = false,    -- Jobs to enter {"job1","job2"} , or false for no job.
         blip = {enable = false, sprite = 0},    -- Enable o disable blip (true/false) and sprite (hash blip).
+        showentercircle = false
+        showexitcircle = false
     },
 	
 	[2] = {
@@ -28,6 +30,7 @@ Config.Locations = {
         exit = true,    -- Enable exit prompt (true) or remove exit prompt(false), if you can leave tents by walking through the wall, wall has collision bugs.
 		job = {"sheriff"},  -- Jobs to enter {"job1","job2"} , or false for no job.
 		blip = {enable = true, sprite = 2305242038},    -- Enable o disable blip (true/false) and sprite (hash blip).
+        showentercircle = false
+        showexitcircle = false
     },
 }
-
