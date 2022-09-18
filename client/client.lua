@@ -65,11 +65,15 @@ Citizen.CreateThread(function()
                 if v.exitPos ~= false then 
                     dist2 = GetDistanceBetweenCoords(pcoords, v.exitPos, 1)
                 end
-                if dist < 4.0 then
+                if v.showentercircle then
+                    if dist < 4.0 then
                     Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.enterPos.x, v.enterPos.y, v.enterPos.z-1.2, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
+                    end
                 end
-                if dist2 ~= nil and dist2 < 4.0 and v.exit == true then 
-                    Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.exitPos.x, v.exitPos.y, v.exitPos.z-1.2 , 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
+                if v.showexitcircle then
+                    if dist2 ~= nil and dist2 < 4.0 and v.exit == true then 
+                        Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.exitPos.x, v.exitPos.y, v.exitPos.z-1.2 , 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
+                    end
                 end
                 if dist < 1.2 then 
                     local label  = CreateVarString(10, 'LITERAL_STRING', Config.VarStringEnter..v.name)
