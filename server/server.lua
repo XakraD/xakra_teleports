@@ -6,9 +6,8 @@ end)
 
 
 RegisterServerEvent("xakra_teleports:setcoords_enter")
-AddEventHandler("xakra_teleports:setcoords_enter", function(x,y,z, id)
+AddEventHandler("xakra_teleports:setcoords_enter", function(coords, id)
     local _source = source
-    local _x, _y, _z = x,y,z
     local _id = tonumber(id)
     if Config.Locations[_id].job ~= false then 
         local job = nil
@@ -28,17 +27,10 @@ AddEventHandler("xakra_teleports:setcoords_enter", function(x,y,z, id)
         if hasjob == false then 
             TriggerClientEvent("vorp:TipRight", _source, Config.JobMessage, 6000) 
         elseif hasjob == true then 
-            SetEntityCoords(GetPlayerPed(_source), x, y, z)
+            TriggerClientEvent('xakra_teleports:Teleport', _source, coords)
         end
     else
-        SetEntityCoords(GetPlayerPed(_source), x, y, z)
+        TriggerClientEvent('xakra_teleports:Teleport', _source, coords)
     end
-end)
-
-RegisterServerEvent("xakra_teleports:setcoords_exit")
-AddEventHandler("xakra_teleports:setcoords_exit", function(x,y,z)
-    local _source = source
-    local _x, _y, _z = x,y,z
-    SetEntityCoords(GetPlayerPed(_source), x, y, z-0.5)
 end)
 

@@ -67,19 +67,19 @@ Citizen.CreateThread(function()
                 end
                 if v.showentercircle then
                     if dist < 4.0 then
-                    Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.enterPos.x, v.enterPos.y, v.enterPos.z-1.2, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
+                    Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.enterPos.x, v.enterPos.y, v.enterPos.z-1, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
                     end
                 end
                 if v.showexitcircle then
                     if dist2 ~= nil and dist2 < 4.0 and v.exit == true then 
-                        Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.exitPos.x, v.exitPos.y, v.exitPos.z-1.2 , 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
+                        Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.exitPos.x, v.exitPos.y, v.exitPos.z-1 , 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
                     end
                 end
                 if dist < 1.2 then 
                     local label  = CreateVarString(10, 'LITERAL_STRING', Config.VarStringEnter..v.name)
                     PromptSetActiveGroupThisFrame(InteriorPrompts, label)
                     if Citizen.InvokeNative(0xC92AC953F0A982AE,EnterPrompt) then
-                        TriggerServerEvent("xakra_teleports:setcoords_enter", v.exitPos.x, v.exitPos.y, v.exitPos.z, i)
+                        TriggerServerEvent("xakra_teleports:setcoords_enter", vector3(v.exitPos.x, v.exitPos.y, v.exitPos.z-1), i, PlayerPedId())
                         Citizen.Wait(2000)
                     end
                 end
@@ -87,7 +87,7 @@ Citizen.CreateThread(function()
                     local label  = CreateVarString(10, 'LITERAL_STRING', Config.VarStringExit..v.name)
                     PromptSetActiveGroupThisFrame(InteriorExitPrompts, label)
                     if Citizen.InvokeNative(0xC92AC953F0A982AE,ExitPrompt) then
-                        TriggerServerEvent("xakra_teleports:setcoords_exit", v.enterPos.x, v.enterPos.y, v.enterPos.z)
+                        TriggerEvent('xakra_teleports:Teleport', vector3(v.enterPos.x, v.enterPos.y, v.enterPos.z-1))
                         Citizen.Wait(2000)
                     end
                 end
@@ -97,4 +97,9 @@ Citizen.CreateThread(function()
         end
         Citizen.Wait(t)
     end
+end)
+
+RegisterNetEvent('xakra_teleports:Teleport')
+AddEventHandler('xakra_teleports:Teleport', function(coords)
+    SetEntityCoords(PlayerPedId(), coords)
 end)
