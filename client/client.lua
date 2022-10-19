@@ -23,7 +23,7 @@ function InteriorExitPromptset()
 
     local str2 = Config.PromptEnter
     EnterPrompt = PromptRegisterBegin()
-    PromptSetControlAction(EnterPrompt, Config.keyExit)
+    PromptSetControlAction(EnterPrompt, Config.KeyExit)
     str2 = CreateVarString(10, 'LITERAL_STRING', str2)
     PromptSetText(EnterPrompt, str2)
     PromptSetEnabled(EnterPrompt, 1)
@@ -67,12 +67,14 @@ Citizen.CreateThread(function()
                 end
                 if v.showentercircle then
                     if dist < 4.0 then
-                    Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.enterPos.x, v.enterPos.y, v.enterPos.z-1, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
+                        Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.enterPos.x, v.enterPos.y, v.enterPos.z-1, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 
+                        Config.DrawMarkerColor.r, Config.DrawMarkerColor.g, Config.DrawMarkerColor.b, 20, 0, 0, 2, 0, 0, 0, 0)
                     end
                 end
                 if v.showexitcircle then
                     if dist2 ~= nil and dist2 < 4.0 and v.exit == true then 
-                        Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.exitPos.x, v.exitPos.y, v.exitPos.z-1 , 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 0, 128, 0, 20, 0, 0, 2, 0, 0, 0, 0)
+                        Citizen.InvokeNative(0x2A32FAA57B937173, 0x94FDAE17, v.exitPos.x, v.exitPos.y, v.exitPos.z-1 , 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0.4, 
+                        Config.DrawMarkerColor.r, Config.DrawMarkerColor.g, Config.DrawMarkerColor.b, 20, 0, 0, 2, 0, 0, 0, 0)
                     end
                 end
                 if dist < 1.2 then 

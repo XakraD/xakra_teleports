@@ -3,13 +3,15 @@ Config = {}
 Config.JobMessage = "No tienes permitido entrar" -- Message when you don't have the job to access
 
 Config.KeyEnter =  0xCEFD9220
-Config.keyExit = 0xCEFD9220
+Config.KeyExit = 0xCEFD9220
 
 Config.PromptEnter = "Entrar"   -- Enter button text.
 Config.PromptExit = "Salir" --Exit button text.
 
 Config.VarStringEnter = "Entrada a: " -- Text before the name of the enter house
 Config.VarStringExit = "Salida de: " -- Text before the name of the exit house
+
+Config.DrawMarkerColor = {r = 0, g = 128, b = 0}
 
 Config.Locations = { 
     {
