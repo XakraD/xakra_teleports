@@ -9,7 +9,7 @@ AddEventHandler("xakra_teleports:setcoords_enter", function(coords, jobs)
         local hasjob = false
 
         for _, v in pairs(jobs or {}) do 
-            if v == job then 
+            if v == Character.job then 
                 hasjob = true
                 break
             end
