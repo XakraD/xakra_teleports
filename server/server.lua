@@ -1,7 +1,7 @@
 local VORPcore = exports.vorp_core:GetCore()
 
 RegisterServerEvent("xakra_teleports:setcoords_enter")
-AddEventHandler("xakra_teleports:setcoords_enter", function(coords, jobs)
+AddEventHandler("xakra_teleports:setcoords_enter", function(DataLocation, coords, jobs)
     local _source = source
     local Character = VORPcore.getUser(_source).getUsedCharacter
 
@@ -21,6 +21,6 @@ AddEventHandler("xakra_teleports:setcoords_enter", function(coords, jobs)
         end
     end
 
-    TriggerClientEvent('xakra_teleports:Teleport', _source, coords)
+    TriggerClientEvent('xakra_teleports:Teleport', _source, DataLocation, coords)
 end)
 

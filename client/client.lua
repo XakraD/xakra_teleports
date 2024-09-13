@@ -38,11 +38,11 @@ CreateThread(function()
 end)
 
 CreateThread(function()
-    for _, location in pairs(Config.Locations) do
-        if location.blip.enable == true then
-            local blip = BlipAddForCoords(1664425300, location.enterPos)
-            SetBlipSprite(blip, location.blip.sprite, 1)
-            SetBlipName(blip, location.name)
+    for _, v in pairs(Config.Locations) do
+        if v.blip.enable then
+            v.BlipHandle = BlipAddForCoords(1664425300, v.enterPos)
+            SetBlipSprite(v.BlipHandle, v.blip.sprite, 1)
+            SetBlipName(v.BlipHandle, v.name)
         end
     end
 
@@ -81,7 +81,7 @@ CreateThread(function()
                     UiPromptSetActiveGroupThisFrame(InteriorPrompts, label)
 
                     if UiPromptHasHoldModeCompleted(EnterPrompt) then
-                        TriggerServerEvent("xakra_teleports:setcoords_enter", vector3(v.exitPos.x, v.exitPos.y, v.exitPos.z - 1), v.job)
+                        TriggerServerEvent("xakra_teleports:setcoords_enter", v, vector3(v.exitPos.x, v.exitPos.y, v.exitPos.z - 1), v.job)
                         Wait(2000)
                     end
 
@@ -90,7 +90,7 @@ CreateThread(function()
                     UiPromptSetActiveGroupThisFrame(InteriorExitPrompts, label)
 
                     if UiPromptHasHoldModeCompleted(ExitPrompt) then
-                        TriggerEvent('xakra_teleports:Teleport', vector3(v.enterPos.x, v.enterPos.y, v.enterPos.z - 1))
+                        TriggerEvent('xakra_teleports:Teleport', v, vector3(v.enterPos.x, v.enterPos.y, v.enterPos.z - 1))
                         Wait(2000)
                     end
                 end
@@ -102,13 +102,34 @@ CreateThread(function()
 end)
 
 RegisterNetEvent('xakra_teleports:Teleport')
-AddEventHandler('xakra_teleports:Teleport', function(coords)
+AddEventHandler('xakra_teleports:Teleport', function(DataLocation, coords)
+    FreezeEntityPosition(PlayerPedId(), true)
+    TaskStandStill(PlayerPedId(), -1)
+
     DoScreenFadeOut(2000)
     repeat Wait(2000) until IsScreenFadedOut()
 
     SetEntityCoords(PlayerPedId(), coords)
-    Wait(1000)
+    Wait(DataLocation.Wait or 1000)
+
+    ClearPedTasks(PlayerPedId())
+    TaskStandStill(PlayerPedId(), -1)
 
     DoScreenFadeIn(2000)
 	repeat Wait(500) until IsScreenFadedIn()
+
+    ClearPedTasks(PlayerPedId())
+    FreezeEntityPosition(PlayerPedId(), false)
+end)
+
+AddEventHandler('onResourceStop', function(resourceName)
+    if (GetCurrentResourceName() ~= resourceName) then
+        return
+    end
+
+    for _, v in pairs(Config.Locations) do
+        if DoesBlipExist(v.BlipHandle) then
+            RemoveBlip(v.BlipHandle)
+        end
+    end
 end)
