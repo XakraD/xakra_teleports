@@ -7,6 +7,8 @@ local InteriorPrompts = GetRandomIntInRange(0, 0xffffff)
 local ExitPrompt
 local InteriorExitPrompts = GetRandomIntInRange(0, 0xffffff)
 
+local DataLocation
+
 CreateThread(function()
     ExitPrompt = PromptRegisterBegin()
     UiPromptSetControlAction(ExitPrompt, Config.KeyEnter)
@@ -81,7 +83,8 @@ CreateThread(function()
                     UiPromptSetActiveGroupThisFrame(InteriorPrompts, label)
 
                     if UiPromptHasHoldModeCompleted(EnterPrompt) then
-                        TriggerServerEvent("xakra_teleports:setcoords_enter", v, vector3(v.exitPos.x, v.exitPos.y, v.exitPos.z - 1), v.job)
+                        DataLocation = v
+                        TriggerServerEvent("xakra_teleports:setcoords_enter", vector3(v.exitPos.x, v.exitPos.y, v.exitPos.z - 1), v.job)
                         Wait(2000)
                     end
 
@@ -90,7 +93,8 @@ CreateThread(function()
                     UiPromptSetActiveGroupThisFrame(InteriorExitPrompts, label)
 
                     if UiPromptHasHoldModeCompleted(ExitPrompt) then
-                        TriggerEvent('xakra_teleports:Teleport', v, vector3(v.enterPos.x, v.enterPos.y, v.enterPos.z - 1))
+                        DataLocation = v
+                        TriggerEvent('xakra_teleports:Teleport', vector3(v.enterPos.x, v.enterPos.y, v.enterPos.z - 1))
                         Wait(2000)
                     end
                 end
@@ -102,7 +106,7 @@ CreateThread(function()
 end)
 
 RegisterNetEvent('xakra_teleports:Teleport')
-AddEventHandler('xakra_teleports:Teleport', function(DataLocation, coords)
+AddEventHandler('xakra_teleports:Teleport', function(coords)
     FreezeEntityPosition(PlayerPedId(), true)
     TaskStandStill(PlayerPedId(), -1)
 
