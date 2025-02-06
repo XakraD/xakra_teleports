@@ -23,7 +23,6 @@ Config.Locations = {
         blip = {enable = false, sprite = 0},    -- Enable o disable blip (true/false) and sprite (hash blip).
         showentercircle = false, -- Enable o disable circle on the ground
         showexitcircle = false, -- Enable o disable circle on the ground
-        -- Wait = 3000, -- number (Time that the screen will be black and the player is in the location and the screen completes the fade in)
     },
 	
 	{
@@ -35,6 +34,5 @@ Config.Locations = {
 		blip = {enable = true, sprite = 2305242038},    -- Enable o disable blip (true/false) and sprite (hash blip).
         showentercircle = true, -- Enable o disable circle on the ground
         showexitcircle = true, -- Enable o disable circle on the ground
-        -- Wait = 3000, -- number (Time that the screen will be black and the player is in the location and the screen completes the fade in)
     },
 }

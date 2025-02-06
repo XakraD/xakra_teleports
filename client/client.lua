@@ -113,8 +113,10 @@ AddEventHandler('xakra_teleports:Teleport', function(coords)
     DoScreenFadeOut(2000)
     repeat Wait(2000) until IsScreenFadedOut()
 
-    SetEntityCoords(PlayerPedId(), coords)
-    Wait(DataLocation.Wait or 1000)
+    StartPlayerTeleport(PlayerId(), coords.x, coords.y, coords.z, GetEntityHeading(PlayerPedId()), true, true, true, false)
+    repeat Wait(0) until not IsPlayerTeleportActive()
+    RequestCollisionAtCoord(coords.x, coords.y, coords.z)
+    repeat Wait(0) until HasCollisionLoadedAroundEntity(PlayerPedId())
 
     ClearPedTasks(PlayerPedId())
     TaskStandStill(PlayerPedId(), -1)
